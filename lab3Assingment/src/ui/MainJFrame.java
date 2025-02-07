@@ -4,8 +4,8 @@
  */
 package ui;
 
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import model.User;
 
 /**
  *
@@ -29,6 +29,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        collageButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         registrationTitleLable = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
@@ -168,76 +169,31 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
   //crteate a pop-up
-       try{  // try to execute the code
-
-      // 1. Get the user details (name & college)
-
-      // initializing object of User class.
-      User userObject = new User();
-
-      // get the name from the text field:
-      // name this.nameTextField.getText();
-
-      userObject.setName(this.nameTextField.getText());
-
-      // get the name of the college from the selected combo-box:
-      // college this.collegeComboBox.getSelectedItem().toString();
-      userObject.setCollege(this.collegeComboBox.getSelectedItem().toString());
-
-      //int age;
-      //age = Integer.parseInt(this.ageTextField.getText());
-
-      // Integer.parseInt(< pass a string value which is a number >)                  -> 28
-      // "28"
-      // "kuq" --> NumberFormatException
-
-      // string --> number
-      userObject.setAge(Integer.parseInt(this.ageTextField.getText()));
-
-      // hobbies this.hobbiesTextArea.getText();
-      userObject.setHobby(this.hobbiesTextArea1.getText());
-
-      // 2. Display that same information back to the user (as a popup)
-      // Printing to the output
-
-      System.out.println(userObject.getName());
-      System.out.println(userObject.getCollege());
-
-      System.out.println(userObject.getAge());
-      System.out.println(userObject.getHobby());
-
-      System.out.println(userObject);
-
-      if(userObject.getName().isBlank()) {
-                                 JOptionPane.showMessageDialog(rootPane, "Please enter your name.", "Oops!", HEIGHT);
-
-      } else{                   // Creating a popup
-
-                                 //JOptionPane.showMessageDialog(rootPane, <message>, <title>, HEIGHT);
-                                 JOptionPane.showMessageDialog(rootPane, userObject, "Success!", HEIGHT);
-
-                                 // "Welcome"<name> +" to "+ <college>
-                                 // Welcome Rish to COE
-
-      }
-
-    } catch (NullPointerException ne) {
-                               // when the user does not select the college radio buttons
-
-                               JOptionPane.showMessageDialog(rootPane, "Please select your college.", "Oops!", HEIGHT);
-                               System.out.println(ne.getMessage());
-
-                               ne.printStackTrace();
-    } catch (NumberFormatException e) {
-
-                               JOptionPane.showMessageDialog(rootPane, "Please enter your age correctly.", "Oops!", HEIGHT);
-
-    } catch (Exception e){     JOptionPane.showMessageDialog(rootPane, "Oops, something went wrong!", "Failed!", HEIGHT);
-
-                               System.out.println(e.getMessage());
-                               e.printStackTrace();
-
-}
+        try {
+            String name;
+        String college;
+        
+       name= this.nameTextField.getText();
+        
+        college = this.collageComboBox.getSelectedItems().toString();
+        //2. display save data as pop-up
+        JOptionPane.showMessageDialog(this, "Name: " + name + "\nCollege: " + college, "Registration Details", JOptionPane.INFORMATION_MESSAGE);
+         // JOptionPane.showMessageDialog(rootPane,"Welcome" +name +"To The College :" +college,"Success!" ,HEIGHT);
+        //print
+        System.out.println("Name : "+name);
+        System.out.println("College : "+college);
+        if(name.isBlank()){
+            JOptionPane.showMessageDialog(rootPane,"Please add Name","Opppss!" ,HEIGHT);
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Welcome" +name +"To The College :" +college,"Success!" ,HEIGHT);
+        }
+            
+        } catch (NullPointerException ne) {
+            //when the user doesnot add college
+            JOptionPane.showMessageDialog(rootPane,"Please add College","Opps!" ,HEIGHT);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane,"!!Something went wrong !!","Error!" ,HEIGHT);
+        }
                 
 
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -284,6 +240,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageLabel;
     private javax.swing.JTextField ageTextField;
+    private javax.swing.ButtonGroup collageButtonGroup;
     private javax.swing.JLabel collageNameLabel;
     private javax.swing.JComboBox<String> collegeComboBox;
     private javax.swing.JLabel hobbiesLabel;
