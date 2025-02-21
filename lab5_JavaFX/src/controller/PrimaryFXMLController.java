@@ -27,16 +27,43 @@ public class PrimaryFXMLController implements Initializable {
         // TODO
     }  
     @FXML
-    TextField namefeild;
+    private TextField namefeild;
+    @FXML
+    private TextField agefield;
+    @FXML
+    private TextField emailField;
     
     
-    public  void submit(){
-        String name = namefeild.getText();
-        System.out.println("Thank you for the Name" +name);
-        
-        //Alert
-        Alert userAlert = new Alert(AlertType.INFORMATION);
-        userAlert.setTitle("Success");
-        userAlert.setHeaderText(name);
+    @FXML
+    public void submit() {
+        try {
+            // Check if fields are null (debugging)
+            if (namefeild == null || agefield == null || emailField == null) {
+                throw new IllegalStateException("One or more fields are not initialized.");
+            }
+
+            String name = namefeild.getText();
+            String age = agefield.getText();
+            String email = emailField.getText();
+
+            // Validate input
+            if (name.isEmpty() || age.isEmpty() || email.isEmpty()) {
+                throw new IllegalArgumentException("Please fill in all fields.");
+            }
+
+            // Display the details in an alert
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Registration Details");
+            alert.setHeaderText("Thank you for registering!");
+            alert.setContentText("Name: " + name + "\nAge: " + age + "\nEmail: " + email);
+            alert.showAndWait();
+        } catch (Exception e) {
+            // Handle exceptions (e.g., show an error alert)
+            Alert errorAlert = new Alert(AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("An error occurred");
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.showAndWait();
+        }
     }
 }
